@@ -898,8 +898,10 @@ def generate_story(principle, occupation, city, age):
     prompt = f"""
         Write a short story that illustrates this Abraham-Hicks principle: {principle["principle"]} in the category of {principle["category"]}
 
-        It should include 1-3 people around age {age} in {city}.
+        It should include 1-3 people around age {age} in {city}. 
+        The people's ages should NOT be explicitly stated.
         One person has the occupation: {occupation}.
+        Length: Between 300 and 400 words.
     """
 
     completion = client.chat.completions.create(
@@ -919,7 +921,8 @@ def generate_title(story):
         Write a succinct title (under 10 words) for social media - not too clickbaity, but enough to capture attention - that would be intriguing to an Abraham-Hicks devotee, for the following story:
         {story}
 
-        Include aspects of the story that would have universal appeal, but also be specific to the Abraham-Hicks community.
+        Include: Aspects of the story that would have universal appeal, but also be specific to the Abraham-Hicks community.
+        DO NOT INCLUDE: Any names or city names unless they are common and universally known.
     """
     completion = client.chat.completions.create(
         model="o4-mini",
@@ -935,8 +938,14 @@ def generate_title(story):
 def generate_summary(story):
 
     prompt = f"""
-        Write a short summary (under 50 words - don't include any hashtags) for social media that would be intriguing to an Abraham-Hicks devotee, for the following story:
-        {story}
+        Write a short summary for social media that would be intriguing to an Abraham-Hicks devotee, for the following story.
+        Length: Under 40 words
+        Include: Aspects of the story that would have universal appeal, but also be specific to the Abraham-Hicks community.
+        DO NOT INCLUDE: 
+        - Any names or city names unless they are common and universally known.
+        - Hashtags
+
+        Story: {story}
     """
 
     completion = client.chat.completions.create(
@@ -955,8 +964,10 @@ def generate_image(story):
     response = client.images.generate(
 		model="dall-e-3",
 		prompt=f"""
-			Create an image for the following story in the style of beautiful modern artwork from the region mentioned in the story: {story}
-			Text: The image should NOT include ANY text.
+			Create an image for the following story in the style of beautiful artwork by a modern artist from the region mentioned in the story.
+            IMPORTANT: Make sure is NO text or anything like text in the image.
+            Story: {story}
+
 		""",
 		size="1024x1024",
 		quality="standard",
@@ -986,12 +997,13 @@ def create_next_folder():
     
     return next_num
 
-def create_content_json(story_num, title, summary, category, story, hashtags):
+def create_content_json(story_num, title, summary, principle, story, hashtags):
     # Create content dictionary
     content = {
         "title": title,
         "summary": summary,
-        "category": category,
+        "principle": principle["principle"],
+        "category": principle["category"],
         "story": story,
         "hashtags": hashtags
     }
@@ -1058,13 +1070,13 @@ def run():
     random_occupation = get_random_item(occupations)
     random_city = get_random_item(cities)
     random_principle = get_random_item(principles)
-    random_age = random.randint(12, 75)
-    category = random_principle["category"]
+    random_age = random.randint(15, 70)
 
     print(random_principle["principle"])
     print(random_principle["category"])
     print(random_occupation)
     print(random_city)
+    print(random_age)
 
     story = generate_story(random_principle, random_occupation, random_city, random_age)
     title = generate_title(story)
@@ -1095,7 +1107,7 @@ def run():
         print("Failed to generate image URL")
         exit()
         
-    create_content_json(story_num, title, summary, category, story, hashtags)
+    create_content_json(story_num, title, summary, random_principle, story, hashtags)
     create_images_json(story_dir, num_slides)
 
 

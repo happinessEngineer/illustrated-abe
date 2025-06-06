@@ -25,13 +25,13 @@ def split_story_into_sentences(story):
     
     return sentences
 
-def join_sentences_under_length(sentences, max_length=280):
+def join_sentences_under_length(sentences, max_length=400):
     """
     Join sentences together into groups that are under a specified character length.
     
     Args:
         sentences (list): Array of sentences to join
-        max_length (int): Maximum character length for each group (default 280)
+        max_length (int): Maximum character length for each group (default 400)
         
     Returns:
         list: Array of joined sentence groups
@@ -84,17 +84,17 @@ def create_slide_images(story, output_dir):
     height = 1024
     
     # Font settings
-    font_size = 60 # Reduced font size slightly
+    font_size = 50
     
     # Increased spacing between lines further
-    line_spacing = 35 # Increased spacing between lines further
+    line_spacing = 30 # Increased spacing between lines further
     
     # Sparkle icon settings
     sparkle_image_path = "star.png"
     sparkle_opacity = 0.25 # 25% opacity
     top_right_sparkle_size_multiplier = 0.125 # 1/8 of width
     bottom_left_sparkle_size_multiplier = 0.166 # About 1/6 of width
-    edge_padding = 40 # Padding from the image edges
+    edge_padding = 60 # Padding from the image edges
     
     font = ImageFont.truetype("Quicksand-VariableFont_wght.ttf", size=font_size)
     font.set_variation_by_axes([600])  # Set weight to 600 (semi-bold for main text)
