@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+import random
 
 def wrap_text(text, font, max_width, draw):
     words = text.split()
@@ -156,7 +157,13 @@ def create_cover_image(
     # Create glow effect for title
     glow_overlay = Image.new('RGBA', base.size, (0,0,0,0))
     glow_draw = ImageDraw.Draw(glow_overlay)
-    glow_color = (255, 105, 180, 255)  # More vibrant pink color with full opacity
+    glow_color = random.choice([
+        (46, 196, 182, 255),   # Soft Aqua Blue
+        (180, 151, 255, 255),  # Dreamy Lavender
+        (235, 162, 113, 255),  # Sunset Peach/Coral
+        (37, 56, 88, 255),     # Celestial Deep Blue
+        (255, 111, 145, 255)   # Soft Rose Pink
+    ])
 
     # Draw wrapped text with glow
     cur_y = subtitle_y + subtitle_height + 32  # Increased spacing after subtitle
