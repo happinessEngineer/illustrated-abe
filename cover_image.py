@@ -26,7 +26,7 @@ def create_cover_image(
     title_font_path="Quicksand-VariableFont_wght.ttf",
     subtitle_font_path="Lora-Italic-VariableFont_wght.ttf",
     font_size=56,
-    subtitle_font_size=32,
+    subtitle_font_size=40,
     banner_opacity=180,
     banner_color=(0,0,0),
     text_color=(255,255,255,255),
