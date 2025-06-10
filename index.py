@@ -964,10 +964,19 @@ def generate_image(story):
     response = client.images.generate(
 		model="dall-e-3",
 		prompt=f"""
-			Create an image for the following story in the style of beautiful artwork by a modern artist from the region mentioned in the story.
-            IMPORTANT: Make sure is NO text or anything like text in the image.
-            Story: {story}
+            ### INSTRUCTION (critical – obey exactly)
+            Create a single 1024×1024 image.  
+            The final image must contain **zero** letters, numbers, symbols, words, logos, signatures, signage, speech bubbles, or text‑like marks of any kind.
 
+            ### ART STYLE
+            Beautiful artwork by a modern artist from the region mentioned in the story below.
+
+            ### CRITICAL – FACE QUALITY
+            Render all faces with natural, realistic proportions, clear symmetrical features, and gentle, authentic smiles. No distortions, no extra facial elements, no text.
+
+
+            ### SUBJECT
+            An art piece depicting the following story: {story}
 		""",
 		size="1024x1024",
 		quality="standard",
