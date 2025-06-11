@@ -1120,4 +1120,6 @@ def run():
     create_images_json(story_dir, num_slides)
 
 
-run()
+num_runs = int(os.getenv('NUM_RUNS', '1'))
+for _ in range(num_runs):
+    run()
