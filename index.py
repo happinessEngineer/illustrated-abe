@@ -969,7 +969,8 @@ def generate_image(story):
             The final image must contain **zero** letters, numbers, symbols, words, logos, signatures, signage, speech bubbles, or text‑like marks of any kind.
 
             ### ART STYLE
-            Beautiful artwork by a modern artist from the region mentioned in the story below.
+            - Cinematic composition and storytelling in a single frame.
+            - Beautiful artwork by a modern artist from the region mentioned in the story below. 
 
             ### CRITICAL – FACE QUALITY
             Render all faces with natural, realistic proportions, clear symmetrical features, and gentle, authentic smiles. No distortions, no extra facial elements, no text.
